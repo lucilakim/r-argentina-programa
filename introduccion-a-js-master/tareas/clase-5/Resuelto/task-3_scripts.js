@@ -5,9 +5,9 @@ const $totalTime = document.querySelector("#total-time");
 
 $button.onclick = function () {
     //Obtaining the form inputs
-    const classHours = document.querySelectorAll("#class-hours");
-    const classMinutes = document.querySelectorAll("#class-minutes");
-    const classSeconds = document.querySelectorAll("#class-seconds");
+    const classHours = document.querySelectorAll(".class-hours");
+    const classMinutes = document.querySelectorAll(".class-minutes");
+    const classSeconds = document.querySelectorAll(".class-seconds");
    
     let totalHours = 0; 
     let totalMinutes = 0; 
@@ -41,5 +41,5 @@ $button.onclick = function () {
     
   
     // Entering the total time of the videos in the html <span>
-    $totalTime.innerText = `Hours: ${totalHours}, Minutes: ${totalMinutes}, Seconds: ${totalSeconds}`
+    $totalTime.innerText = `Hours: ${totalHours}, Minutes: ${totalMinutes}, Seconds: ${totalSeconds}.`
 }
