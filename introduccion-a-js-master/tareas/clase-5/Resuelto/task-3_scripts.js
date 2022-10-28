@@ -1,33 +1,45 @@
 const $button = document.querySelector("#calculate-time");
-const $totalTime = document.querySelector("#total-time")
+const $totalTime = document.querySelector("#total-time");
+
+
 
 $button.onclick = function () {
-    //Obtaining the values of the form inputs
-    const class1Hours = Number(document.querySelector("#class-1-hours").value);
-    const class2Hours = Number(document.querySelector("#class-2-hours").value);
-    const class3Hours = Number(document.querySelector("#class-3-hours").value);
-    const class4Hours = Number(document.querySelector("#class-4-hours").value);
-    const class5Hours = Number(document.querySelector("#class-5-hours").value);
+    //Obtaining the form inputs
+    const classHours = document.querySelectorAll("#class-hours");
+    const classMinutes = document.querySelectorAll("#class-minutes");
+    const classSeconds = document.querySelectorAll("#class-seconds");
+   
+    let totalHours = 0; 
+    let totalMinutes = 0; 
+    let totalSeconds = 0;
 
-    const class1Minutes = Number(document.querySelector("#class-1-minutes").value);
-    const class2Minutes = Number(document.querySelector("#class-2-minutes").value);
-    const class3Minutes = Number(document.querySelector("#class-3-minutes").value);
-    const class4Minutes = Number(document.querySelector("#class-4-minutes").value);
-    const class5Minutes = Number(document.querySelector("#class-5-minutes").value);
+    // Calculating the total hours, minutes, and seconds of the classes
+    for (let i = 0; i < classHours.length; i++){
+        totalHours += Number(classHours[i].value); 
+        totalMinutes += Number(classMinutes[i].value); 
+        totalSeconds += Number(classSeconds[i].value);
+    }
 
-    const class1Seconds = Number(document.querySelector("#class-1-seconds").value);
-    const class2Seconds = Number(document.querySelector("#class-2-seconds").value);
-    const class3Seconds = Number(document.querySelector("#class-3-seconds").value);
-    const class4Seconds = Number(document.querySelector("#class-4-seconds").value);
-    const class5Seconds = Number(document.querySelector("#class-5-seconds").value);
+    // if the seconds exceeds the second
+    if (totalSeconds >= 60) {
+        let fractionsOfSeconds = totalSeconds / 60;   // Obtaining amount of minutes to be added in minutes
+        let seconds = parseInt(fractionsOfSeconds) * 60; // Obtaining the leftover seconds
+        totalSeconds = totalSeconds - seconds; // Obtanining the final seconds
+
+        totalMinutes += parseInt(fractionsOfSeconds); // Adding the remaining seconds to the minutes
+    }
+
+    // if the minutes exceeds the minute
+    if (totalMinutes >= 60) { 
+        let fractionsOfMinutes = totalMinutes / 60;   // Obtaining amount of minutes to be added in hours
+        let minutes = parseInt(fractionsOfMinutes) * 60; // Obtaining the leftover minutes
+        totalMinutes -= minutes; // Obtanining the final minutes
+
+        totalHours += parseInt(fractionsOfMinutes); // Adding the remaining minutes to the hours
+    }
 
     
-    // Calculating the total hours, minutes, and seconds of the classes
-    const totalHours = class1Hours + class2Hours + class3Hours + class4Hours + class5Hours;
-    const totalMinutes = class1Minutes + class2Minutes + class3Minutes + class4Minutes + class5Minutes;
-    const totalSeconds = class1Seconds + class2Seconds + class3Seconds + class4Seconds + class5Seconds;
-
-
+  
     // Entering the total time of the videos in the html <span>
     $totalTime.innerText = `Hours: ${totalHours}, Minutes: ${totalMinutes}, Seconds: ${totalSeconds}`
 }
