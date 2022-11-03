@@ -12,54 +12,51 @@ $buttonNumberClasses.onclick = function () {
         // Creating input title
         // <h3>Class 1</h3>
         const inputTitle = document.createElement('h3');
-        const textInputTitle = document.createTextNode(`Class ${i + 1}`);
-        inputTitle.appendChild(textInputTitle);
+        inputTitle.innerText = `Class ${i + 1}`;
 
         // Creating hours input Label 
         // <label for="class-hours">Hours: </label>
         const hoursLabel = document.createElement('label');
-        hoursLabel.setAttribute("for", "class-hours");
-        const hoursTextLabel = document.createTextNode("Hours: ");
-        hoursLabel.appendChild(hoursTextLabel);
+        hoursLabel.htmlFor = "class-hours";
+        hoursLabel.innerText = "Hours: "
 
         //// Creating hours input  
         //<input type="number" class="class-hours" placeholder="Ej.: 2"/>
         const hoursInput = document.createElement('input');
-        hoursInput.setAttribute("type", "number");
-        hoursInput.setAttribute("class", "class-hours");
-        hoursInput.setAttribute("placeholder", "Ej.: 2");
+        hoursInput.type = "number";
+        hoursInput.classList.add("class-hours");
+        hoursInput.placeholder = "Ej.: 2";
         hoursInput.style.marginRight = "20px";
 
         // ---------------------------
         // Creating minutes input Label 
         // <label for="class-minutes">Minutes: </label>
         const minutesLabel = document.createElement('label');
-        minutesLabel.setAttribute("for", "class-minutes");
-        const minutesTextLabel = document.createTextNode("Minutes: ");
-        minutesLabel.appendChild(minutesTextLabel);
+        minutesLabel.htmlFor = "class-minutes";
+        minutesLabel.innerText = "Minutes: "
+
 
         //// Creating minutes input  
         //<input type="number" class="class-minutes" placeholder="Ej.: 25"/>
         const minutesInput = document.createElement('input');
-        minutesInput.setAttribute("type", "number");
-        minutesInput.setAttribute("class", "class-minutes");
-        minutesInput.setAttribute("placeholder", "Ej.: 25");
+        minutesInput.type = "number";
+        minutesInput.classList.add("class-minutes");
+        minutesInput.placeholder = "Ej.: 25";
         minutesInput.style.marginRight = "20px";
 
         // ----------------------------
         // Creating seconds input Label 
         // <label for="class-seconds">Seconds: </label>
         const secondsLabel = document.createElement('label');
-        secondsLabel.setAttribute("for", "class-seconds");
-        const secondsTextLabel = document.createTextNode("Seconds: ");
-        secondsLabel.appendChild(secondsTextLabel);
+        secondsLabel.htmlFor = "class-seconds";
+        secondsLabel.innerText = "Seconds: ";
 
         //// Creating seconds input  
         //<input type="number" class="class-seconds" placeholder="Ej.: 40"/>
         const secondsInput = document.createElement('input');
-        secondsInput.setAttribute("type", "number");
-        secondsInput.setAttribute("class", "class-seconds");
-        secondsInput.setAttribute("placeholder", "Ej.: 40");
+        secondsInput.type = "number";
+        secondsInput.classList.add("class-seconds");
+        secondsInput.placeholder = "Ej.: 40";
 
         // ----------------------------
         // Adding to the form title/label/input hours
@@ -77,21 +74,21 @@ $buttonNumberClasses.onclick = function () {
     }
 
     // ----------------------------
-    // Creating a button to calcculate the time of videos
+    // Creating a button to calculate the time of videos
     // <button type="button" id="calculate-time">Calculate</button>
     const calculateTimeButton = document.createElement('button');
     calculateTimeButton.type = "button";
     calculateTimeButton.id = "calculate-time";
     calculateTimeButton.style.marginTop = "30px";
     calculateTimeButton.style.display = "block";
-    const textButton = document.createTextNode('Calculate');
-    calculateTimeButton.appendChild(textButton);
+    calculateTimeButton.innerText = "Calculate";
 
     newTimeForm.appendChild(calculateTimeButton); // Adding button to dom
 
     // ==============================
     //Calculating time 
     calculateTimeButton.onclick = function () {
+        const MINUTES_IN_SECONDS = 60;
         //Obtaining the form inputs
         const classHours = document.querySelectorAll(".class-hours");
         const classMinutes = document.querySelectorAll(".class-minutes");
@@ -109,18 +106,18 @@ $buttonNumberClasses.onclick = function () {
         }
 
         // if the seconds exceeds the second
-        if (totalSeconds >= 60) {
-            let fractionsOfSeconds = totalSeconds / 60;   // Obtaining amount of minutes to be added in minutes
-            let seconds = parseInt(fractionsOfSeconds) * 60; // Obtaining the leftover seconds
+        if (totalSeconds >= MINUTES_IN_SECONDS) {
+            let fractionsOfSeconds = totalSeconds / MINUTES_IN_SECONDS;   // Obtaining amount of minutes to be added in minutes
+            let seconds = parseInt(fractionsOfSeconds) * MINUTES_IN_SECONDS; // Obtaining the leftover seconds
             totalSeconds = totalSeconds - seconds; // Obtanining the final seconds
 
             totalMinutes += parseInt(fractionsOfSeconds); // Adding the remaining seconds to the minutes
         }
 
         // if the minutes exceeds the minute
-        if (totalMinutes >= 60) {
-            let fractionsOfMinutes = totalMinutes / 60;   // Obtaining amount of minutes to be added in hours
-            let minutes = parseInt(fractionsOfMinutes) * 60; // Obtaining the leftover minutes
+        if (totalMinutes >= MINUTES_IN_SECONDS) {
+            let fractionsOfMinutes = totalMinutes / MINUTES_IN_SECONDS;   // Obtaining amount of minutes to be added in hours
+            let minutes = parseInt(fractionsOfMinutes) * MINUTES_IN_SECONDS; // Obtaining the leftover minutes
             totalMinutes -= minutes; // Obtanining the final minutes
 
             totalHours += parseInt(fractionsOfMinutes); // Adding the remaining minutes to the hours
@@ -134,3 +131,4 @@ $buttonNumberClasses.onclick = function () {
         $nodePageBody.appendChild(totalTime);
     }
 }
+
