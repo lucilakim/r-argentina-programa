@@ -1,7 +1,9 @@
 const $buttonNumberClasses = document.querySelector("#enter-classes");
 
 $buttonNumberClasses.onclick = function () {
+    // The user is prompted for the number of classes to be calculated.
     const numberOfClasses = Number(document.querySelector("#number-of-classes").value);
+    // The inputs of the classes entered are created, calling a fuction.
     const classes = createInputClasses(numberOfClasses);
 
     // ----------------------------
@@ -39,6 +41,7 @@ $buttonNumberClasses.onclick = function () {
 
 
 function createInputClasses(quantity) {
+    // The form is created with the inputs and added to the dom
     const $nodePageBody = document.querySelector('body');
     const div = document.createElement('div');
     const newTimeForm = document.createElement('form');
