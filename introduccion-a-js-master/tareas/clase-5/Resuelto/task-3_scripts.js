@@ -154,3 +154,4 @@ function calculateDuration() {
 
     return [totalHours, totalMinutes, totalSeconds];
 }
+
