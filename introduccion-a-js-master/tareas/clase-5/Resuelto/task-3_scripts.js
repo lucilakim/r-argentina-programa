@@ -1,31 +1,23 @@
 const $buttonNumberClasses = document.querySelector("#enter-classes");
+const calculateTimeButton = document.querySelector("#calculate-class-time");
 
 $buttonNumberClasses.onclick = function () {
     const numberOfClasses = Number(document.querySelector("#number-of-classes").value);
     const classes = createInputClasses(numberOfClasses);
 
-    const calculateTimeButton = document.createElement('button');
-    calculateTimeButton.type = "button";
-    calculateTimeButton.id = "calculate-time";
-    calculateTimeButton.style.marginTop = "30px";
-    calculateTimeButton.style.display = "block";
-    calculateTimeButton.innerText = "Calculate";
-    classes.appendChild(calculateTimeButton);
+    calculateTimeButton.style.display = 'block';    
+}
 
-    calculateTimeButton.onclick = function () {
-        const totalVideoTime = calculateDuration();
-        const FIRST_POSITION = 0;
-        const SECOND_POSITION = 1;
-        const THIRD_POSITION = 2;
-        const totalHours = totalVideoTime[FIRST_POSITION];
-        const totalMinutes = totalVideoTime[SECOND_POSITION];
-        const totalSeconds = totalVideoTime[THIRD_POSITION];
+calculateTimeButton.onclick = function () {
+    const totalVideoTime = calculateDuration();
+    const totalHours = totalVideoTime[0];
+    const totalMinutes = totalVideoTime[1];
+    const totalSeconds = totalVideoTime[2];
 
-        const $nodePageBody = document.querySelector('body');
-        const totalTime = document.createElement('h3');
-        totalTime.innerText = `The total time of the videos is: Hours: ${totalHours}, Minutes: ${totalMinutes}, Seconds: ${totalSeconds}.`
-        $nodePageBody.appendChild(totalTime);
-    }
+    const $nodePageBody = document.querySelector('body');
+    const totalTime = document.createElement('h3');
+    totalTime.innerText = `The total time of the videos is: Hours: ${totalHours}, Minutes: ${totalMinutes}, Seconds: ${totalSeconds}.`
+    $nodePageBody.appendChild(totalTime);
 }
 
 
@@ -81,7 +73,7 @@ function createInputClasses(quantity) {
 
 
 function calculateDuration() {
-    const MINUTES_IN_SECONDS = 60;
+    const MINUTE_IN_SECONDS = 60;
     const classHours = document.querySelectorAll(".class-hours");
     const classMinutes = document.querySelectorAll(".class-minutes");
     const classSeconds = document.querySelectorAll(".class-seconds");
@@ -95,16 +87,16 @@ function calculateDuration() {
         totalSeconds += Number(classSeconds[i].value);
     }
 
-    if (totalSeconds >= MINUTES_IN_SECONDS) {
-        let fractionsOfSeconds = totalSeconds / MINUTES_IN_SECONDS;
-        let seconds = parseInt(fractionsOfSeconds) * MINUTES_IN_SECONDS;
+    if (totalSeconds >= MINUTE_IN_SECONDS) {
+        const fractionsOfSeconds = totalSeconds / MINUTE_IN_SECONDS;
+        const seconds = parseInt(fractionsOfSeconds) * MINUTE_IN_SECONDS;
         totalSeconds = totalSeconds - seconds;
         totalMinutes += parseInt(fractionsOfSeconds);
     }
 
-    if (totalMinutes >= MINUTES_IN_SECONDS) {
-        let fractionsOfMinutes = totalMinutes / MINUTES_IN_SECONDS;
-        let minutes = parseInt(fractionsOfMinutes) * MINUTES_IN_SECONDS;
+    if (totalMinutes >= MINUTE_IN_SECONDS) {
+        const fractionsOfMinutes = totalMinutes / MINUTE_IN_SECONDS;
+        const minutes = parseInt(fractionsOfMinutes) * MINUTE_IN_SECONDS;
         totalMinutes -= minutes;
         totalHours += parseInt(fractionsOfMinutes);
     }
