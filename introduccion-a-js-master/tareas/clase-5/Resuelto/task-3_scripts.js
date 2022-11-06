@@ -23,7 +23,6 @@ calculateTimeButton.onclick = () => {
     calculateTimeButton.disabled = true;
 }
 
-
 function createInputClasses(quantity) {
     const classDurationForm = document.querySelector("#class-duration")
     const classFormGroup = document.createElement('fieldset');
@@ -33,8 +32,8 @@ function createInputClasses(quantity) {
     classDurationForm.insertBefore(classFormGroup, calculateTimeButton);
 
     for (let i = 0; i < quantity; i++) {
-        const inputTitle = document.createElement('h3');
-        inputTitle.innerText = `Class ${i + 1}`;
+        const title = document.createElement('h3');
+        title.innerText = `Class ${i + 1}`;
 
         const hoursLabel = document.createElement('label');
         hoursLabel.htmlFor = "class-hours";
@@ -60,7 +59,7 @@ function createInputClasses(quantity) {
         secondsInput.classList.add("class-seconds");
         secondsInput.placeholder = "Ej.: 40";
 
-        classFormGroup.appendChild(inputTitle);
+        classFormGroup.appendChild(title);
         classFormGroup.appendChild(hoursLabel);
         classFormGroup.appendChild(hoursInput)
 
@@ -72,7 +71,6 @@ function createInputClasses(quantity) {
     }
     return classFormGroup;
 }
-
 
 function calculateDuration() {
     const MINUTE_IN_SECONDS = 60;
