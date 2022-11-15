@@ -1,49 +1,19 @@
 const $numbersFromHTML = document.querySelectorAll('li')
 const numbers = getNumbers();
 
-const resultNumbers = getAverageSmallerLargestFrequent(numbers);
-const averageOfNumbers = resultNumbers[0];
-const smallerNumber = resultNumbers[1];
-const largestNumber = resultNumbers[2];
-const frequentNumber = resultNumbers[3];
+const averageOfNumbers = getAverage(numbers);
+const smallerNumber = getSmallestNumber(numbers);
+const largestNumber = getLargestNumber(numbers);
+const mostRepeatedNumber = getMostRepeatedNumber(numbers);
 
 const $average = document.querySelector("#average");
 const $smallerNumber = document.querySelector("#smaller-number");
 const $largestNumber = document.querySelector("#largest-number");
-const $frequentNumber = document.querySelector("#frequent-number");
+const $mostRepeatedNumber = document.querySelector("#most-repeated-number");
 $average.innerText = averageOfNumbers;
 $smallerNumber.innerText = smallerNumber;
 $largestNumber.innerText = largestNumber;
-$frequentNumber.innerText = frequentNumber;
-
-function getAverageSmallerLargestFrequent(array) {
-    let sumOfNumbers = 0;
-    let averageOfNumbers = 0;
-    let smallerNumber = numbers[0];
-    let largestNumber = numbers[0];
-    let frequentNumber;
-
-    for (let i = 0; i < array.length; i++) {
-        sumOfNumbers += array[i];
-
-        if (array[i] < smallerNumber) {
-            smallerNumber = array[i];
-        }
-        if (array[i] > largestNumber) {
-            largestNumber = array[i];
-        }
-
-        for (let j = 0; j < array.length; j++) {
-            if (array[i] === array[j]) {
-                frequentNumber = array[j];
-            }
-        }
-
-        averageOfNumbers = sumOfNumbers / array.length;
-
-    }
-    return [averageOfNumbers, smallerNumber, largestNumber, frequentNumber];
-}
+$mostRepeatedNumber.innerText = mostRepeatedNumber;
 
 function getNumbers() {
     const totalNumbers = []
@@ -52,6 +22,51 @@ function getNumbers() {
     }
     return totalNumbers
 }
+
+function getAverage(numbers) {
+    let sum = 0;
+    for (let i = 0; i < numbers.length; i++) {
+        sum += numbers[i];
+    }
+    return sum / numbers.length;
+}
+
+function getSmallestNumber(numbers) {
+    let smallerNumber = numbers[0];
+    for (let i = 0; i < numbers.length; i++) {
+        if (numbers[i] < smallerNumber) {
+            smallerNumber = numbers[i];
+        }
+    }
+    return smallerNumber;
+}
+
+function getLargestNumber(numbers) {
+    let largestNumber = numbers[0];
+    for (let i = 0; i < numbers.length; i++) {
+        if (numbers[i] > largestNumber) {
+            largestNumber = numbers[i];
+        }
+    }
+    return largestNumber;
+}
+
+function getMostRepeatedNumber(numbers) {
+    let repeatedNumber;
+    for (let i = 0; i < numbers.length; i++) {
+        for (let j = i + 1; j < numbers.length; j++) {
+            if (numbers[i] === numbers[j]) {
+                repeatedNumber = numbers[j];
+            }
+        }
+    }
+    return repeatedNumber;
+}
+
+
+
+
+
 
 
 
