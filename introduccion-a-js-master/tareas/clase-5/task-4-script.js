@@ -1,4 +1,4 @@
-const $bodyFromHtml = document.querySelector('body');
+const $body = document.querySelector('body');
 const $buttonNumberList = document.querySelector('#number-of-items-button');
 const calculateValuesButton = document.querySelector('#calculate-list-values');
 
@@ -11,21 +11,21 @@ $buttonNumberList.onclick = () => {
 
 calculateValuesButton.onclick = () => {
     const $resultsOfList = document.querySelector("#results-of-the-calculations-of-the-list");
-    const valuesQuantity = document.querySelectorAll('.input-values');
-    const values = getNumbers(valuesQuantity);
-    createList(values.length);
-    setResultOfList();
+    const numbersFromHTML = document.querySelectorAll('.input-values');
+    const numbers = getNumbers(numbersFromHTML);
+    createList(numbers.length);
+    setResult();
     $resultsOfList.style.display = 'block';
     calculateValuesButton.disabled = "true";
 }
 
 function createInputItems(quantity) {
-    const formTitle = document.createElement('h3');
-    formTitle.innerText = "Enter the values to be calculated: ";
+    const title = document.createElement('h3');
+    title.innerText = "Enter the values to be calculated: ";
     const listValuesForm = document.querySelector("#list-values-form");
     const listFormGroup = document.createElement('fieldset');
     listFormGroup.classList.add("values-form-group");
-    listFormGroup.appendChild(formTitle);
+    listFormGroup.appendChild(title);
     listValuesForm.appendChild(listFormGroup);
     listValuesForm.insertBefore(listFormGroup, calculateValuesButton);
 
@@ -49,9 +49,10 @@ function createList() {
     const resultCalculation = document.querySelector("#results-of-the-calculations-of-the-list")
     const list = document.createElement('ol');
     const title = document.createElement('h4');
-    title.innerText = `List`;
+    title.innerText = 'List';
     const formValues = document.querySelectorAll('.list-value');
     const values = getValuesFrom(formValues);
+    console.log(values);
 
     for (let i = 0; i < values.length; i++) {
         const listItem = document.createElement('li');
@@ -62,16 +63,15 @@ function createList() {
 
     listContent.appendChild(title);
     listContent.appendChild(list);
-    $bodyFromHtml.appendChild(listContent);
-    $bodyFromHtml.insertBefore(listContent, resultCalculation)
+    $body.appendChild(listContent);
+    $body.insertBefore(listContent, resultCalculation)
 }
 
-
-function setResultOfList() {
+function setResult() {
     const $resultsOfList = document.querySelector("#results-of-the-calculations-of-the-list");
     const title = document.createElement('h4');
     title.innerText = 'Results'
-    const firtsResult = document.querySelector("#first-result");
+    const firstResult = document.querySelector("#first-result");
 
     const numbersFromList = document.querySelectorAll('.list-item');
     const numbers = getNumbers(numbersFromList);
@@ -90,13 +90,13 @@ function setResultOfList() {
     $mostRepeatedNumber.innerText = checkForDuplicateNumber(mostRepeatedNumber);
 
     $resultsOfList.appendChild(title);
-    $resultsOfList.insertBefore(title, firtsResult)
+    $resultsOfList.insertBefore(title, firstResult)
 }
 
-function getValuesFrom(inputList) {
+function getValuesFrom(numbers) {
     const totalNumbers = [];
-    for (let i = 0; i < inputList.length; i++) {
-        totalNumbers.push(Number(inputList[i].value));
+    for (let i = 0; i < numbers.length; i++) {
+        totalNumbers.push(Number(numbers[i].value));
     }
     return totalNumbers
 }

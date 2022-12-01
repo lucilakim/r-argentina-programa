@@ -24,11 +24,7 @@
 .list-value {
     margin-left: 5px;
 }
-.calculate-list-values-button {
+
+.calculate-list-values-button, .results-of-the-calculations-of-the-list {
     display: none;
 }
-
-.results-of-the-calculations-of-the-list {
-    display: none;
-}
-
