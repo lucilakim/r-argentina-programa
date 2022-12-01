@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="task-4_styles.css">
+</head>
+
+<body>
+    <h1 class="title">Value calculator from list values </h1>
+    <h2 class="subtitle">(average, smaller number, largest number, most repeated number)</h2>
+
+    <form id="list-values-form" class="list-values-form">
+        <label for="number-of-list">Number of items to be added: </label>
+        <input type="number" id="number-of-list" placeholder="E.g.: 4">
+        <button type="button" id="number-of-items-button">Enter</button>
+
+        <button type="button" id="calculate-list-values" class="calculate-list-values-button">Calculate</button>
+    </form>
+
+    <div class="results-of-the-calculations-of-the-list" id="results-of-the-calculations-of-the-list">
+        <p id="first-result">The average number is: <em id="average"></em></p>
+        <p>The smaller number is: <em id="smaller-number"></em></p>
+        <p>The largest number is: <em id="largest-number"></em></p>
+        <p>The most repeated number is: <em id="most-repeated-number"></em></p>
+    </div>
+
+    <script src="./task-4_script.js"></script>
+</body>
+
+</html>
+
