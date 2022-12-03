@@ -2,45 +2,67 @@ const $body = document.querySelector('body');
 const $buttonFamilyMembers = document.querySelector('#button-family-members');
 
 $buttonFamilyMembers.onclick = () => {
-    const $familyMembers = document.querySelector('#members-in-family').value;
-    const title = document.createElement('h3');
-    title.innerText = "Enter the ages of family members"
-    $body.appendChild(title);
-    const familyAgeForm = createForm($familyMembers, "family-members", "Member", "Calculate", "get-ages");
-    $body.appendChild(familyAgeForm);    
+	const $familyMembers = document.querySelector('#members-in-family').value;
 
-    const buttonCalculateValues = document.querySelector('#get-ages');
-    console.log(buttonCalculateValues);
-}
+	const title = document.createElement('h3');
+	title.innerText = 'Enter the ages of family members';
+	$body.appendChild(title);
+
+	const familyAgeForm = createForm($familyMembers);
+	$body.appendChild(familyAgeForm);
+
+	const buttonCalculateValues = document.querySelector('#get-ages');
+	console.log(buttonCalculateValues);
+};
 
 console.log(buttonCalculateValues);
 
-function createForm(inputQuantity,  forIdClass, labelMessage, buttonMessage, buttonId) {
-    const form = document.createElement('form');
-    const fragment = new DocumentFragment();
+function createForm(inputQuantity) {
+	const $form = document.createElement('form');
 
-    for(let i = 0; i < inputQuantity; i++){
-        const label = document.createElement('label');
-        label.htmlFor = forIdClass;
-        label.innerText = `${labelMessage} ${i+1}: `;
-        const input = document.createElement('input');
-        input.classList.add = forIdClass;
-        input.id = forIdClass;
-        fragment.append(label);
-        fragment.append(input);
-    }
+	$form.appendChild(addFamilyInputs(inputQuantity));
 
-    const button = document.createElement('button');
-    button.id = buttonId;
-    button.textContent = buttonMessage;
-    fragment.append(button);
-    form.appendChild(fragment);
-    return form;
-} 
+	const $formButton = createButtonForm('get-ages');
+	$form.appendChild($formButton);
 
-function getNumbers(){
-    //for(let i = 0; i < )
+	return $form;
 }
+
+function addFamilyInputs(quantity) {
+	const $inputsContainer = document.createElement('div');
+
+	for (let i = 0; i < quantity; i++) {
+		const $familyMember = createFamilyInput(i);
+
+		$inputsContainer.appendChild($familyMember);
+	}
+}
+
+function createButtonForm(id, innerTextContent) {
+	const $button = document.createElement('button');
+	$button.id = id || 'form-family-button';
+	$button.textContent = innerTextContent || 'Calculate';
+
+	return $button;
+}
+
+function createFamilyInput(id) {
+	const $familyInputContainer = document.createElement('div');
+
+	const $label = document.createElement('label');
+	$label.htmlFor = 'family-members';
+	$label.innerText = `Member ${id + 1}: `;
+
+	const $input = document.createElement('input');
+	$input.classList.add = 'family-members';
+	$input.id = 'family-members';
+
+	$familyInputContainer.appendChild($label);
+	$familyInputContainer.appendChild($input);
+
+	return $familyInputContainer;
+}
+
 
 /*
 TAREA: Empezar preguntando cuánta gente hay en el grupo familiar.
