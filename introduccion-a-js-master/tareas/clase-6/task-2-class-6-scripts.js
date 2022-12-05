@@ -1,6 +1,6 @@
 const $body = document.querySelector('body');
-const $buttonAddInput = document.querySelector('#add-input-button');
-const $buttonRemoveInput = document.querySelector('#remove-input-button');
+const $buttonAdd = document.querySelector('#add-input-button');
+const $buttonRemove = document.querySelector('#remove-input-button');
 const $salaryFormContent = document.querySelector('#salary-form-content');
 const $salaryForm = document.querySelector('#salary-form');
 const $buttonCalculateSalary = document.querySelector('#calculate-salary-button');
@@ -11,7 +11,7 @@ $salaryFormTitle.classList.add = "salary-form-title"
 $salaryFormTitle.innerText = "Enter the annual salary of each family member, only one salary per input";
 $salaryFormContent.insertBefore($salaryFormTitle, $salaryForm);
 
-$buttonAddInput.onclick = () => {
+$buttonAdd.onclick = () => {
     $salaryFormContent.style.display = "block";
     $salaryFormTitle.style.display = "block";
 
@@ -21,36 +21,36 @@ $buttonAddInput.onclick = () => {
     return false;
 }
 
-$buttonRemoveInput.onclick = () => {
-    const $allLabels = document.querySelectorAll('.salary-label');
-    const $allInputs = document.querySelectorAll('.salary-input');
+$buttonRemove.onclick = () => {
+    const $labels = document.querySelectorAll('.salary-label');
+    const $inputs = document.querySelectorAll('.salary-input');
 
-    $allLabels[$allLabels.length - 1].remove();
-    $allInputs[$allInputs.length - 1].remove();
+    $labels[$labels.length - 1].remove();
+    $inputs[$inputs.length - 1].remove();
     $resultContent.style.display = "none";
 
-    cleanUpInput($allInputs);
+    cleanUpInput($inputs);
     return false;
 }
 
 $buttonCalculateSalary.onclick = () => {
-    const allWagesFromHtml = document.querySelectorAll('.salary-input');
-    const allWages = getNumbers(allWagesFromHtml);
+    const salariesFromHtml = document.querySelectorAll('.salary-input');
+    const salaries = getNumbers(salariesFromHtml);
 
-    const higherSalary = getHigher(allWages);
-    const smallerSalary = getSmaller(allWages);
-    const averageSalary = getAverage(allWages);
+    const higherSalary = getHigher(salaries);
+    const smallerSalary = getSmaller(salaries);
+    const averageSalary = getAverage(salaries);
     const averageMonthlySalary = getMonthlySalary(averageSalary);
 
     $resultContent.style.display = "block";
-    const $higerSalaryElement = document.querySelector('#higher-salary');
-    const $smallerSalaryElement = document.querySelector('#lower-salary');
-    const $averageSalaryElement = document.querySelector('#average-salary');
-    const $averageMonthlySalaryElement = document.querySelector('#average-monthly-salary');
-    $higerSalaryElement.innerText = `The higher salary is: ${higherSalary}`;
-    $smallerSalaryElement.innerText = `The smaller salary is: ${smallerSalary}`;
-    $averageSalaryElement.innerText = `The average annual salary is: ${averageSalary}`;
-    $averageMonthlySalaryElement.innerText = `The average monthly salary is: ${averageMonthlySalary}`;
+    const $higherSalaryText = document.querySelector('#higher-salary');
+    const $smallerSalaryText = document.querySelector('#lower-salary');
+    const $averageSalaryText = document.querySelector('#average-salary');
+    const $averageMonthlySalaryText = document.querySelector('#average-monthly-salary');
+    $higherSalaryText.innerText = `The higher salary is: ${higherSalary}`;
+    $smallerSalaryText.innerText = `The smaller salary is: ${smallerSalary}`;
+    $averageSalaryText.innerText = `The average annual salary is: ${averageSalary}`;
+    $averageMonthlySalaryText.innerText = `The average monthly salary is: ${averageMonthlySalary}`;
 
     return false;
 }
