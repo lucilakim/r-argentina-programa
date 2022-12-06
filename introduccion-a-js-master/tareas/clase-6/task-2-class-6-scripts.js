@@ -15,9 +15,11 @@ $buttonAdd.onclick = () => {
     $salaryFormContent.style.display = "block";
     $salaryFormTitle.style.display = "block";
 
-    const $salaryInputs = createLabelInput("Annual Salary: ", "salary-label", "salary-input");
-    $salaryForm.insertBefore($salaryInputs, $buttonCalculateSalary)
+    const $salaryLabel = createLabel("Annual Salary: ", "salary-label");
+    const $salaryInput = createInput("salary-input");
 
+    $salaryForm.insertBefore($salaryLabel, $buttonCalculateSalary);
+    $salaryForm.insertBefore($salaryInput, $buttonCalculateSalary);
     return false;
 }
 
@@ -44,34 +46,31 @@ $buttonCalculateSalary.onclick = () => {
 
     $resultContent.style.display = "block";
     const $higherSalaryText = document.querySelector('#higher-salary');
-    const $smallerSalaryText = document.querySelector('#lower-salary');
+    const $smallerSalaryText = document.querySelector('#smaller-salary');
     const $averageSalaryText = document.querySelector('#average-salary');
     const $averageMonthlySalaryText = document.querySelector('#average-monthly-salary');
     $higherSalaryText.innerText = `The higher salary is: ${higherSalary}`;
     $smallerSalaryText.innerText = `The smaller salary is: ${smallerSalary}`;
     $averageSalaryText.innerText = `The average annual salary is: ${averageSalary}`;
     $averageMonthlySalaryText.innerText = `The average monthly salary is: ${averageMonthlySalary}`;
-
     return false;
 }
 
-function createLabelInput(labelMessage, labelIdClass, inputIdClass) {
-    const $fragment = new DocumentFragment();
-
+function createLabel(message, id) {
     const $label = document.createElement('label');
-    $label.htmlFor = inputIdClass;
-    $label.id = labelIdClass;
-    $label.classList.add(labelIdClass);
-    $label.innerText = labelMessage;
+    $label.htmlFor = id;
+    $label.id = id;
+    $label.classList.add(id);
+    $label.innerText = message;
+    return $label;
+}
+
+function createInput(id) {
     const $input = document.createElement('input');
     $input.type = "number";
-    $input.id = inputIdClass;
-    $input.classList.add(inputIdClass);
-
-    $fragment.append($label);
-    $fragment.append($input);
-
-    return $fragment;
+    $input.id = id;
+    $input.classList.add(id);
+    return $input;
 }
 
 function getNumbers(numbers) {
@@ -128,3 +127,4 @@ Al hacer click en "calcular", mostrar en un elemento pre-existente el mayor sala
 
 Punto bonus: si hay inputs vacíos, ignorarlos en el cálculo (no contarlos como 0).
 */
+
