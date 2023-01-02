@@ -1,0 +1,14 @@
+.calculate-button {
+    display: none;
+    margin-top: 20px;
+}
+
+.class-hours,
+.class-minutes {
+    margin-right: 20px;
+}
+
+.class-form-group {
+    border: none;
+}
+
